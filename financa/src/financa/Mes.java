@@ -55,11 +55,7 @@ public class Mes extends Dia {
         
         return entradaTotal;
     }
-    
-     public float getEntrada(int dia) {
-        return  dias.get(dia-1).getEntrada();
-    }
-
+   
     @Override
     public float getSaida() {
         int saidaTotal = 0;
@@ -71,5 +67,9 @@ public class Mes extends Dia {
     
     protected void setEntrada(int dia, float valor){
         dias.get(dia-1).setEntrada(valor);
+    }
+    
+    protected void setSaida(int dia, float valor){
+        dias.get(dia-1).setSaida(valor);
     }
 }

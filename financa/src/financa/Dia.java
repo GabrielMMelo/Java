@@ -23,10 +23,16 @@ public class Dia  {
         return saida;
     }
     
+    /**
+     * @param valor the value that has been received
+     */
     public void setEntrada(float valor) {
         entrada += valor;
     }
 
+    /**
+     * @param valor the value that has been paid
+     */
     public void setSaida(float valor) {
         saida += valor;
     }

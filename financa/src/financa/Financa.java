@@ -19,7 +19,6 @@ public class Financa {
      */
     
     public static void main(String[] args) {
-        // TODO code application logic here
         int data[] = getData();
         System.out.println(data[2]);
         Ano ano = new Ano();
@@ -40,8 +39,10 @@ public class Financa {
         System.out.println("Setembro: " + ano.getEntrada(9));
         System.out.println("Outubro: " + ano.getEntrada(10));
         System.out.println("Novembro: " + ano.getEntrada(11));
-        System.out.println("Dezemrbo: " + ano.getEntrada(12));
-        
+        System.out.println("Dezembro: " + ano.getEntrada(12));
+        //ano.meses(1).getEntrada();
+        System.out.println("Dia 12 de Fevereiro: " + ano.getEntrada(2,12));
+        System.out.println("Dia 22 de Fevereiro: " + ano.getEntrada(2,22));
        // float ent = ano.getEntrada();
         
     }

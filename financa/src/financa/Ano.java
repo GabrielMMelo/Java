@@ -38,17 +38,33 @@ public class Ano extends Mes {
     public float getEntrada(int mes) {
         return  meses.get(mes-1).getEntrada();
     }
-
+    
+    public float getEntrada(int mes, int dia) {
+        return  meses.get(mes-1).dias.get(dia-1).getEntrada();
+    }
+    
     @Override
     public float getSaida() {
         int saidaTotal = 0;
         for (int i = 0; i < 12; i++) {
-            saidaTotal +=  meses.get(i).saida;
+            saidaTotal +=  meses.get(i).getSaida();
         }
         return saidaTotal;
     }
     
+     public float getSaida(int mes) {
+        return  meses.get(mes-1).getSaida();
+    }
+    
+    public float getSaida(int mes, int dia) {
+        return  meses.get(mes-1).dias.get(dia-1).getSaida();
+    }
+    
     public void setEntrada(int mes, int dia, float valor){
         meses.get(mes-1).setEntrada(dia, valor);
+    }
+    
+    public void setSaida(int mes, int dia, float valor){
+        meses.get(mes-1).setSaida(dia, valor);
     }
 }
