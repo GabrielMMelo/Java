@@ -5,9 +5,6 @@
  */
 package financa;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 /**
  *
  * @author melo
@@ -19,8 +16,11 @@ public class Financa {
      */
     
     public static void main(String[] args) {
-        int data[] = getData();
+        Hoje hoje = new Hoje();
+        int data[] = hoje.getHoje();
         System.out.println(data[2]);
+        int horario[] = hoje.getAgora();
+        System.out.println(horario[0]);
         Ano ano = new Ano();
         //ano.setEntrada(mesAtual, diaAtual, 200);
         System.out.println("Antes do deposito: " + ano.getEntrada());
@@ -46,11 +46,5 @@ public class Financa {
        // float ent = ano.getEntrada();
         
     }
-    public static int[] getData(){
-        Date dataAtual= new Date();
-        String dataStr;
-        dataStr = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(dataAtual);
-        String Data[] =  dataStr.split("/");       
-        return new int[] {Integer.parseInt(Data[0]), Integer.parseInt(Data[1]), Integer.parseInt(Data[2])};
-    }
+
 }

@@ -5,6 +5,8 @@
  */
 package financa;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author melo
@@ -12,8 +14,8 @@ package financa;
 public class Dia  {
     
     protected float entrada;
-
     protected float saida;
+    ArrayList<Transacao> transacoes = new ArrayList();
     
     public float getEntrada() {
         return entrada;
@@ -23,6 +25,9 @@ public class Dia  {
         return saida;
     }
     
+    public void listEntrada() {
+        
+    }
     /**
      * @param valor the value that has been received
      */
