@@ -27,12 +27,11 @@ public class Financa {
         int diaAtual = Integer.parseInt(Data[0]);
         int mesAtual = Integer.parseInt(Data[1]);
         int anoAtual = Integer.parseInt(Data[2]);
-        Ano ano = new Ano(Data[2]);
         System.out.println(anoAtual);
-        //System.out.println(ano.getEntrada());
-        Mes mes = new Mes();
+        Ano ano = new Ano();
         
-        mes.getEntrada();
+        //System.out.println(ano.getEntrada());
+       // float ent = ano.getEntrada();
         
     }
     

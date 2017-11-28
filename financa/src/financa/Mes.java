@@ -5,81 +5,68 @@
  */
 package financa;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author melo
  */
 public class Mes extends Dia {
 
-    private Dia dia[];
-    protected float entrada;
-    protected float saida;
-    
-    public Mes() {
-    //public Mes(String mes) {
-    /*    switch(mes){
-            case "Janeiro":
-                dia = new Dia[31];
-                break;
-            case "Fevereiro":
-                dia = new Dia[31];
-                break;
-            case "Marco":
-                dia = new Dia[31];
-                break;
-            case "Abril":
-                dia = new Dia[31];
-                break;
-            case "Maio":
-                dia = new Dia[31];
-                break;
-            case "Junho":
-                dia = new Dia[31];
-                break;
-            case "Julho":
-                dia = new Dia[31];
-                break;
-            case "Agosto":
-                dia = new Dia[31];
-                break;
-            case "Setembro":
-                dia = new Dia[31];
-                break;
-            case "Outubro":
-                dia = new Dia[31];
-                break;
-            case "Novembro":
-                dia = new Dia[31];
-                break;
-            case "Dezembro":
-                dia = new Dia[31];
-                break;
-        }
-      */
-    dia = new Dia[31];
+    //private Dia dia[];
+    ArrayList<Dia> dias = new ArrayList();
+    //protected float entrada1;
+    //protected float saida1;
+    public Mes(){
+        
     }
+    public Mes(int mes) {
+        switch(mes){
+            case 2: 
+                for (int i = 0; i < 28; i++) {
+                    Dia dia = new Dia();
+                    dias.add(dia);
+                }
+                
+            break;
+
+            case 4: case 6: case 9: case 11:
+                for (int i = 0; i < 30; i++) {
+                    Dia dia = new Dia();
+                    dias.add(dia);
+                }
+            break;
+            
+            default:
+                for (int i = 0; i < 31; i++) {
+                    Dia dia = new Dia();
+                    dias.add(dia);
+                }
+            break;
+        }
+    } 
 
     @Override
     public float getEntrada() {
-        entrada = 0;
-        for (int i = 0; i < 31; i++) {
-            entrada +=  dia[i].entrada;
+        int entradaTotal = 0;
+        for (int i = 0; i < dias.size(); i++) {
+            entradaTotal +=  dias.get(i).entrada;
             System.out.print(i);
         }
         
-        return entrada;
+        return entradaTotal;
     }
 
     @Override
     public float getSaida() {
-        saida = 0;
-        for (int i = 0; i < 31; i++) {
-            saida +=  dia[i].saida;
+        int saidaTotal = 0;
+        for (int i = 0; i < dias.size(); i++) {
+            saidaTotal +=  dias.get(i).saida;
         }
-        return saida;
+        return saidaTotal;
     }
     
     protected void setEntrada(int dia, float valor){
-        this.dia[dia].setEntrada(valor);
+        this.dias.get(dia).setEntrada(valor);
     }
 }

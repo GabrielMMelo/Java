@@ -5,41 +5,47 @@
  */
 package financa;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author melo
  */
 public class Ano extends Mes {
-    private Mes mes[];
-    protected float entrada;
-    protected float saida;
+    //private Mes mes[];
+    ArrayList<Mes> meses = new ArrayList();
+    //protected float entrada2;
+    //protected float saida2;
     public String ano;
 
-    public Ano(String ano){
-         mes = new Mes[12];
-         this.ano = ano;
+    public Ano(){
+        System.out.print(1);
+        for (int i = 1; i <= 12; i++) {
+            Mes mes = new Mes(i);
+            meses.add(mes);
+        }
+         //this.ano = ano;
     }
     
     @Override
     public float getEntrada() {
-        entrada = 0;
-        for (int i = 0; i < 31; i++) {
-            entrada +=  mes[i].entrada;
+        int entradaTotal = 0;
+        for (int i = 0; i < 12; i++) {
+            entradaTotal +=  meses.get(i).entrada;
         }
-        return entrada;
+        return entradaTotal;
     }
 
     @Override
     public float getSaida() {
-        saida = 0;
-        for (int i = 0; i < 31; i++) {
-            saida +=  mes[i].entrada;
+        int saidaTotal = 0;
+        for (int i = 0; i < 12; i++) {
+            saidaTotal +=  meses.get(i).saida;
         }
-        return saida;
+        return saidaTotal;
     }
     
     public void setEntrada(int mes, int dia, float valor){
-        this.mes[mes].setEntrada(dia, valor);
+        this.meses.get(mes).setEntrada(dia, valor);
     }
-    
 }
