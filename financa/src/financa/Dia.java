@@ -9,7 +9,7 @@ package financa;
  *
  * @author melo
  */
-public class Dia {
+public class Dia  {
     
     protected float entrada;
 

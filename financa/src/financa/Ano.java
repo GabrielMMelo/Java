@@ -19,7 +19,6 @@ public class Ano extends Mes {
     public String ano;
 
     public Ano(){
-        System.out.print(1);
         for (int i = 1; i <= 12; i++) {
             Mes mes = new Mes(i);
             meses.add(mes);
@@ -31,9 +30,13 @@ public class Ano extends Mes {
     public float getEntrada() {
         int entradaTotal = 0;
         for (int i = 0; i < 12; i++) {
-            entradaTotal +=  meses.get(i).entrada;
+            entradaTotal +=  meses.get(i).getEntrada();
         }
         return entradaTotal;
+    }
+    
+    public float getEntrada(int mes) {
+        return  meses.get(mes-1).getEntrada();
     }
 
     @Override
@@ -46,6 +49,6 @@ public class Ano extends Mes {
     }
     
     public void setEntrada(int mes, int dia, float valor){
-        this.meses.get(mes).setEntrada(dia, valor);
+        meses.get(mes-1).setEntrada(dia, valor);
     }
 }

@@ -51,10 +51,13 @@ public class Mes extends Dia {
         int entradaTotal = 0;
         for (int i = 0; i < dias.size(); i++) {
             entradaTotal +=  dias.get(i).entrada;
-            System.out.print(i);
         }
         
         return entradaTotal;
+    }
+    
+     public float getEntrada(int dia) {
+        return  dias.get(dia-1).getEntrada();
     }
 
     @Override
@@ -67,6 +70,6 @@ public class Mes extends Dia {
     }
     
     protected void setEntrada(int dia, float valor){
-        this.dias.get(dia).setEntrada(valor);
+        dias.get(dia-1).setEntrada(valor);
     }
 }
