@@ -50,7 +50,7 @@ public class Mes extends Dia {
     public float getEntrada() {
         int entradaTotal = 0;
         for (int i = 0; i < dias.size(); i++) {
-            entradaTotal +=  dias.get(i).entrada;
+            entradaTotal +=  dias.get(i).getEntrada();
         }
         
         return entradaTotal;
@@ -60,7 +60,7 @@ public class Mes extends Dia {
     public float getSaida() {
         int saidaTotal = 0;
         for (int i = 0; i < dias.size(); i++) {
-            saidaTotal +=  dias.get(i).saida;
+            saidaTotal +=  dias.get(i).getSaida();
         }
         return saidaTotal;
     }
@@ -72,4 +72,15 @@ public class Mes extends Dia {
     protected void setSaida(int dia, float valor){
         dias.get(dia-1).setSaida(valor);
     }
+    
+    public void novaTransacao(int dia,boolean tipo, float valor, String descricao) {
+         this.dias.get(dia-1).novaTransacao(tipo, valor, descricao);
+    }
+    
+     public void listMes() {
+      for (int i = 0; i < dias.size(); i++) {
+          dias.get(i).listDia(i+1);
+        }  
+    }
+    
 }

@@ -18,16 +18,53 @@ public class Dia  {
     ArrayList<Transacao> transacoes = new ArrayList();
     
     public float getEntrada() {
+        atualizaEntrada();
         return entrada;
     }
+    
+    private void atualizaEntrada(){
+        float entradaTotal = 0; 
+        for (int i = 0; i < transacoes.size(); i++) {
+            if("Saída".equals(transacoes.get(i).getTipo())){
+                entradaTotal += transacoes.get(i).getValor();
+            }
+        }
+        entrada = entradaTotal;
+    }
 
+    public void novaTransacao(boolean tipo, float valor, String descricao){
+        Transacao transacao = new Transacao(valor, descricao, tipo);
+        transacoes.add(transacao);
+    }
+    
     public float getSaida() {
+        atualizaSaida();
         return saida;
     }
     
-    public void listEntrada() {
-        
+    private void atualizaSaida(){
+        float saidaTotal = 0;
+        for (int i = 0; i < transacoes.size(); i++) {
+            if("Saída".equals(transacoes.get(i).getTipo())){
+                saidaTotal += transacoes.get(i).getValor();
+            }
+        }
+        saida = saidaTotal;
     }
+    
+    public void listDia(int dia) {
+        if(this.transacoes.size()!=0)
+            System.out.print("      Dia "+ dia + ": ");
+        for (int i = 0; i < transacoes.size(); i++) {
+            if(i==0)
+                System.out.print(transacoes.get(i).getTipo() + " de ");  
+            else
+                System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
+            System.out.print("R$"+transacoes.get(i).getValor()+ " ");
+            System.out.println(transacoes.get(i).getDescricao());
+        }  
+    }
+    
     /**
      * @param valor the value that has been received
      */

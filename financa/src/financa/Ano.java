@@ -18,12 +18,12 @@ public class Ano extends Mes {
     //protected float saida2;
     public String ano;
 
-    public Ano(){
+    public Ano(String ano){
         for (int i = 1; i <= 12; i++) {
             Mes mes = new Mes(i);
             meses.add(mes);
         }
-         //this.ano = ano;
+        this.ano = ano;
     }
     
     @Override
@@ -67,4 +67,72 @@ public class Ano extends Mes {
     public void setSaida(int mes, int dia, float valor){
         meses.get(mes-1).setSaida(dia, valor);
     }
+    
+    public void novaTransacao(int mes, int dia,boolean tipo, float valor, String descricao) {
+        this.meses.get(mes-1).novaTransacao(dia,tipo, valor, descricao);
+    }
+    
+    /*
+    *   Sobrescrita para nova transição usando dia de hoje
+    *
+    *  
+    */
+    
+    @Override
+    public void novaTransacao(boolean tipo, float valor, String descricao) {
+        Hoje hoje  = new Hoje();
+        int data[] = hoje.getHoje();
+        this.meses.get(data[1]-1).novaTransacao(data[0],tipo, valor, descricao);
+    }
+     
+     public void listAno() {
+        System.out.println(ano+":");
+      for (int i = 0; i < meses.size(); i++) {
+          System.out.println(converteMes(i));
+          meses.get(i).listMes(); 
+      }
+    }
+     
+    private String converteMes(int mes) {
+        String conversao="";
+        switch(mes) {
+              case 0:
+                  conversao = "  JANEIRO:"; 
+                  break;
+              case 1:
+                  conversao = "  FEVEREIRO:";
+                  break;
+              case 2:
+                  conversao = "  MARÇO:";
+                  break;
+              case 3:
+                  conversao = "  ABRIL:";
+                  break;    
+              case 4:
+                  conversao = "  MAIO:";
+                  break;
+              case 5:
+                  conversao = "  JUNHO:";
+                  break;
+              case 6:
+                  conversao = "  JULHO:";
+                  break;
+              case 7:
+                  conversao = "  AGOSTO:";
+                  break;
+              case 8:
+                  conversao = "  SETEMBRO:";
+                  break;
+              case 9:
+                  conversao = "  OUTUBRO:";
+                  break;
+              case 10:
+                  conversao = "  NOVEMBRO:";
+                  break;
+              case 11:
+                  conversao = "  DEZEMBRO:";
+                  break;
+        }
+        return conversao;
+   }
 }

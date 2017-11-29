@@ -16,7 +16,7 @@ public class Transacao {
     private String tipo;
     
     
-    public Transacao(int valor, String descricao, boolean tipo){
+    public Transacao(float valor, String descricao, boolean tipo){
         if (tipo)
             this.tipo = "Saída";
         else
@@ -33,5 +33,13 @@ public class Transacao {
     
     public float getValor(){
         return valor;
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+    
+    public String getHora(){
+        return hora;
     }
 }
