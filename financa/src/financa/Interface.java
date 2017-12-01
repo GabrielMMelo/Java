@@ -188,7 +188,12 @@ public class Interface {
                             System.out.println("Saída: R$"+saida2);
                             System.out.println("Entrada: R$"+entrada2);
                             float total = entrada2 - saida2;
-                            System.out.println("Saldo total: R$" + total);
+                            if (total <0) {
+                                total *= -1;
+                                System.out.println("Saldo total: -R$" + total);
+                            }
+                            else
+                                System.out.println("Saldo total: R$" + total);
                             chave2 = 0;
                         break;
                         
@@ -202,7 +207,12 @@ public class Interface {
                             System.out.println("Saída: R$"+ saida);
                             System.out.println("Entrada: R$"+entrada);
                             float total2 = entrada - saida;
-                            System.out.println("Saldo total: R$" + total2);
+                            if (total2 <0) {
+                                total2 *= -1;
+                                System.out.println("Saldo total: -R$" + total2);
+                            }
+                            else
+                                System.out.println("Saldo total: R$" + total2);
                             chave2 = 0;
                         break;
                     }
