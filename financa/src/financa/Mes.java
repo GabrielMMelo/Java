@@ -65,13 +65,6 @@ public class Mes extends Dia {
         return saidaTotal;
     }
     
-    protected void setEntrada(int dia, float valor){
-        dias.get(dia-1).setEntrada(valor);
-    }
-    
-    protected void setSaida(int dia, float valor){
-        dias.get(dia-1).setSaida(valor);
-    }
     
     public void novaTransacao(int dia,boolean tipo, float valor, String descricao) {
          this.dias.get(dia-1).novaTransacao(tipo, valor, descricao);

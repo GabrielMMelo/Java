@@ -22,7 +22,7 @@ public class Transacao {
         else
             this.tipo = "Entrada";
         Hoje hoje = new Hoje();
-        this.hora = hoje.getSAgora();
+        this.hora = hoje.getStrAgora();
         this.valor = valor;
         this.descricao = descricao;
     }

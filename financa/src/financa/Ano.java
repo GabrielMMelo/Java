@@ -60,13 +60,6 @@ public class Ano extends Mes {
         return  meses.get(mes-1).dias.get(dia-1).getSaida();
     }
     
-    public void setEntrada(int mes, int dia, float valor){
-        meses.get(mes-1).setEntrada(dia, valor);
-    }
-    
-    public void setSaida(int mes, int dia, float valor){
-        meses.get(mes-1).setSaida(dia, valor);
-    }
     
     public void novaTransacao(int mes, int dia,boolean tipo, float valor, String descricao) {
         this.meses.get(mes-1).novaTransacao(dia,tipo, valor, descricao);

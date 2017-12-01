@@ -19,7 +19,7 @@ public class Financa {
         Hoje hoje = new Hoje();
         int data[] = hoje.getHoje();
         Ano ano = new Ano(String.valueOf(data[2]));
-        ano.novaTransacao(2, 12, true, 200, "Compra de coxinha do Saulo");
+        /*ano.novaTransacao(2, 12, true, 200, "Compra de coxinha do Saulo");
         ano.novaTransacao(11, 20, true, 200, "Compra de Tênis");
         ano.novaTransacao(2, 20, false, 200, "Sorteio de dez real");
         ano.novaTransacao(3, 17, false, 200, "Mesada da Mãe");
@@ -29,7 +29,9 @@ public class Financa {
         ano.novaTransacao(true, 200, "Drogas");        
         ano.listAno();
         
-        System.out.print("R$"+ano.getEntrada());
+        System.out.print("R$"+ano.getEntrada(1,6));*/
+        Interface menu = new Interface(ano);
+        menu.menu();
         
     }
 

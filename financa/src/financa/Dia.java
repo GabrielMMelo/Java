@@ -23,13 +23,11 @@ public class Dia  {
     }
     
     private void atualizaEntrada(){
-        float entradaTotal = 0; 
         for (int i = 0; i < transacoes.size(); i++) {
             if("Saída".equals(transacoes.get(i).getTipo())){
-                entradaTotal += transacoes.get(i).getValor();
+                setEntrada(transacoes.get(i).getValor());
             }
         }
-        entrada = entradaTotal;
     }
 
     public void novaTransacao(boolean tipo, float valor, String descricao){
@@ -43,13 +41,11 @@ public class Dia  {
     }
     
     private void atualizaSaida(){
-        float saidaTotal = 0;
         for (int i = 0; i < transacoes.size(); i++) {
             if("Saída".equals(transacoes.get(i).getTipo())){
-                saidaTotal += transacoes.get(i).getValor();
+                setSaida(transacoes.get(i).getValor());
             }
         }
-        saida = saidaTotal;
     }
     
     public void listDia(int dia) {

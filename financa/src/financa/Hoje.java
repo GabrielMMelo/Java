@@ -29,7 +29,7 @@ public class Hoje {
         return new int[] {Integer.parseInt(Data[0]), Integer.parseInt(Data[1]), Integer.parseInt(Data[2])};
     }
     
-    public String getSAgora(){
+    public String getStrAgora(){
         Date dataAtual= new Date();
         String dataStr;
         dataStr = java.text.DateFormat.getTimeInstance(DateFormat.MEDIUM).format(dataAtual);
