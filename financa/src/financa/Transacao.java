@@ -7,16 +7,21 @@ package financa;
 
 /**
  *
- * @author melo
+ * @author GabrielMMelo
  */
 public class Transacao {
-    private String descricao;
+    private String tag;
     private float valor;
     private String hora;
     private String tipo;
     
-    
-    public Transacao(float valor, String descricao, boolean tipo){
+    /**
+     * 
+     * @param valor Quantia (em R$) referente à transação
+     * @param tag Tag <> que identifica a natureza da transação
+     * @param tipo Tipo da transação ("Saida" ou "Entrada")
+     */
+    public Transacao(float valor, String tag, boolean tipo){
         if (tipo)
             this.tipo = "Saída";
         else
@@ -24,21 +29,37 @@ public class Transacao {
         Hoje hoje = new Hoje();
         this.hora = hoje.getStrAgora();
         this.valor = valor;
-        this.descricao = descricao;
+        this.tag = tag;
     }
     
-    public String getDescricao(){
-        return descricao;
+    /**
+     * 
+     * @return A Tag da transação
+     */
+    public String getTag(){
+        return tag;
     }
     
+    /**
+     * 
+     * @return O valor (em R$) da transação
+     */
     public float getValor(){
         return valor;
     }
     
+    /**
+     * 
+     * @return O tipo da transação ("Saida" ou "Entrada")
+     */
     public String getTipo(){
         return tipo;
     }
     
+    /**
+     * 
+     * @return (not used) A hora de efetuação da transação
+     */
     public String getHora(){
         return hora;
     }

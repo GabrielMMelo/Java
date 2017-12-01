@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author melo
+ * @author GabrielMMelo
  */
 public class Dia  {
     
@@ -17,30 +17,52 @@ public class Dia  {
     protected float saida;
     ArrayList<Transacao> transacoes = new ArrayList();
     
+    /**
+     * 
+     * @return 
+     */
     public float getEntrada() {
         atualizaEntrada();
         return entrada;
     }
     
+    /**
+     * 
+     */
     private void atualizaEntrada(){
+        setEntrada(-1);
         for (int i = 0; i < transacoes.size(); i++) {
-            if("Saída".equals(transacoes.get(i).getTipo())){
+            if("Entrada".equals(transacoes.get(i).getTipo())){
                 setEntrada(transacoes.get(i).getValor());
             }
         }
     }
-
-    public void novaTransacao(boolean tipo, float valor, String descricao){
-        Transacao transacao = new Transacao(valor, descricao, tipo);
+    
+    /**
+     * 
+     * @param tipo
+     * @param valor
+     * @param tag 
+     */
+    public void novaTransacao(boolean tipo, float valor, String tag){
+        Transacao transacao = new Transacao(valor, tag, tipo);
         transacoes.add(transacao);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public float getSaida() {
         atualizaSaida();
         return saida;
     }
     
+    /**
+     * 
+     */
     private void atualizaSaida(){
+        setSaida(-1);
         for (int i = 0; i < transacoes.size(); i++) {
             if("Saída".equals(transacoes.get(i).getTipo())){
                 setSaida(transacoes.get(i).getValor());
@@ -48,6 +70,10 @@ public class Dia  {
         }
     }
     
+    /**
+     * 
+     * @param dia 
+     */
     public void listDia(int dia) {
         if(this.transacoes.size()!=0)
             System.out.print("      Dia "+ dia + ": ");
@@ -57,7 +83,7 @@ public class Dia  {
             else
                 System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
             System.out.print("R$"+transacoes.get(i).getValor()+ " ");
-            System.out.println(transacoes.get(i).getDescricao());
+            System.out.println("<"+transacoes.get(i).getTag()+">");
         }  
     }
     
@@ -65,16 +91,29 @@ public class Dia  {
      * @param valor the value that has been received
      */
     public void setEntrada(float valor) {
-        entrada += valor;
+        if(valor == -1){
+            entrada = 0;
+        }
+        else{
+            entrada += valor;
+        }
     }
 
     /**
      * @param valor the value that has been paid
      */
     public void setSaida(float valor) {
-        saida += valor;
+        if(valor == -1){
+            saida = 0;
+        }
+        else{
+            saida += valor;
+        }
     }
     
+    /**
+     * 
+     */
     public Dia() {
         entrada = 0;
         saida = 0;

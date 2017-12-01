@@ -10,9 +10,13 @@ import java.util.Date;
 
 /**
  *
- * @author melo
+ * @author GabrielMMelo
  */
 public class Hoje {
+    /**
+     * 
+     * @return 
+     */
     public int[] getHoje(){
         Date dataAtual= new Date();
         String dataStr;
@@ -21,6 +25,10 @@ public class Hoje {
         return new int[] {Integer.parseInt(Data[0]), Integer.parseInt(Data[1]), Integer.parseInt(Data[2])};
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int[] getAgora(){
         Date dataAtual= new Date();
         String dataStr;
@@ -29,6 +37,10 @@ public class Hoje {
         return new int[] {Integer.parseInt(Data[0]), Integer.parseInt(Data[1]), Integer.parseInt(Data[2])};
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getStrAgora(){
         Date dataAtual= new Date();
         String dataStr;

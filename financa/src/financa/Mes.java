@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author melo
+ * @author GabrielMMelo
  */
 public class Mes extends Dia {
 
@@ -20,6 +20,10 @@ public class Mes extends Dia {
     public Mes(){
         
     }
+    /**
+     * 
+     * @param mes 
+     */
     public Mes(int mes) {
         switch(mes){
             case 2: 
@@ -45,7 +49,11 @@ public class Mes extends Dia {
             break;
         }
     } 
-
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public float getEntrada() {
         int entradaTotal = 0;
@@ -56,6 +64,10 @@ public class Mes extends Dia {
         return entradaTotal;
     }
    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public float getSaida() {
         int saidaTotal = 0;
@@ -65,11 +77,20 @@ public class Mes extends Dia {
         return saidaTotal;
     }
     
-    
-    public void novaTransacao(int dia,boolean tipo, float valor, String descricao) {
-         this.dias.get(dia-1).novaTransacao(tipo, valor, descricao);
+    /**
+     * 
+     * @param dia
+     * @param tipo
+     * @param valor
+     * @param tag 
+     */
+    public void novaTransacao(int dia,boolean tipo, float valor, String tag) {
+         this.dias.get(dia-1).novaTransacao(tipo, valor, tag);
     }
     
+    /**
+     * 
+     */
      public void listMes() {
       for (int i = 0; i < dias.size(); i++) {
           dias.get(i).listDia(i+1);
