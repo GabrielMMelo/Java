@@ -8,27 +8,23 @@ package financa;
 import java.util.Scanner;
 
 /**
- *
+ * Classe responsável pelo tratamento das entradas do usuário e a exibição das saídas que guiam a interação com o usuário.
  * @author GabrielMMelo
  */
 public class Interface {
     Scanner sc = new Scanner(System.in); 
     Ano ano;
-    /**
-     *
-     * @param ano
-     */
     
     /**
      * 
-     * @param ano 
+     * @param ano Ano em que as operações referem
      */
     public Interface(Ano ano){
         this.ano = ano;
     }
     
     /**
-     * 
+     * Método que realiza todas as interações com o usuário
      */
     public void menu(){
         System.out.println("          ****************************************");
@@ -83,8 +79,9 @@ public class Interface {
     
     
     /**
-     * 
-     * @param operacao 
+     * Método que auxilia método menu() para manipular as entradas e saídas para usuário usuário. Foi criado visando modularização do código.
+     * @param operacao Uma das operações disponibilizadas no método menu()
+     * * @see menu() 
      */
     private void subMenu(int operacao){
         switch(operacao){
@@ -223,13 +220,16 @@ public class Interface {
         
     }
     
+    /**
+     * Função que "limpa" a tela do console
+     */
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }
     
     /**
-     * 
+     * Tela de informações sobre o projeto e o autor
      */
     public void sobre(){
         clearScreen();

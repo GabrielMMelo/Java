@@ -8,21 +8,19 @@ package financa;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe filha de Dia e pai de Ano. Representa um mês de um ano.
  * @author GabrielMMelo
+ * @see Dia
+ * @see Ano
  */
 public class Mes extends Dia {
-
-    //private Dia dia[];
     ArrayList<Dia> dias = new ArrayList();
-    //protected float entrada1;
-    //protected float saida1;
     public Mes(){
         
     }
     /**
-     * 
-     * @param mes 
+     * Construtor que cria uma lista com os n dias correspondentes de cada mês. (Ex: Janeiro possui 31 dias, Setembro possui 30 dias) 
+     * @param mes Número referente a um mês de um ano. (Ex: 1 = Janeiro, 2 = Fevereiro, ..., 12 = Dezembro) 
      */
     public Mes(int mes) {
         switch(mes){
@@ -51,8 +49,8 @@ public class Mes extends Dia {
     } 
     
     /**
-     * 
-     * @return 
+     * Método que informa a entrada total deste mês
+     * @return Entrada Total
      */
     @Override
     public float getEntrada() {
@@ -65,8 +63,8 @@ public class Mes extends Dia {
     }
    
     /**
-     * 
-     * @return 
+     * Método que informa a saída total deste mês
+     * @return Saída total
      */
     @Override
     public float getSaida() {
@@ -78,18 +76,18 @@ public class Mes extends Dia {
     }
     
     /**
-     * 
-     * @param dia
-     * @param tipo
-     * @param valor
-     * @param tag 
+     * Cria uma nova transação em um determinado dia deste mês
+     * @param dia Dia da transação
+     * @param tipo Tipo da transação
+     * @param valor Valor da transação
+     * @param tag Tag que identifica a transação
      */
     public void novaTransacao(int dia,boolean tipo, float valor, String tag) {
          this.dias.get(dia-1).novaTransacao(tipo, valor, tag);
     }
     
     /**
-     * 
+     * Método que informa todas as transações de um mês
      */
      public void listMes() {
       for (int i = 0; i < dias.size(); i++) {

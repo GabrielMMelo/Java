@@ -8,18 +8,24 @@ package financa;
 import java.util.ArrayList;
 
 /**
- *
+ * Superclasse de Mes. Representa um dia de um mês
  * @author GabrielMMelo
+ * @see Mes
  */
 public class Dia  {
-    
+    /**
+     * Entrada total deste dia
+     */
     protected float entrada;
+    /**
+     * Saída total deste dia
+     */
     protected float saida;
     ArrayList<Transacao> transacoes = new ArrayList();
     
     /**
-     * 
-     * @return 
+     *  Método que informa o total de entradas deste dia
+     * @return Entrada total
      */
     public float getEntrada() {
         atualizaEntrada();
@@ -27,7 +33,7 @@ public class Dia  {
     }
     
     /**
-     * 
+     * Método auxiliar para atualização do valor de entrada deste dia
      */
     private void atualizaEntrada(){
         setEntrada(-1);
@@ -39,10 +45,10 @@ public class Dia  {
     }
     
     /**
-     * 
-     * @param tipo
-     * @param valor
-     * @param tag 
+     * Realiza a criação de uma nova transação deste dia
+     * @param tipo Tipo da transação
+     * @param valor Valor da transação
+     * @param tag Tag que identifica a natureza da transação
      */
     public void novaTransacao(boolean tipo, float valor, String tag){
         Transacao transacao = new Transacao(valor, tag, tipo);
@@ -50,8 +56,8 @@ public class Dia  {
     }
     
     /**
-     * 
-     * @return 
+     *  Método que informa o total de saídas deste dia
+     * @return Saída total
      */
     public float getSaida() {
         atualizaSaida();
@@ -59,7 +65,7 @@ public class Dia  {
     }
     
     /**
-     * 
+     * Método auxiliar para atualização do valor de saída deste dia
      */
     private void atualizaSaida(){
         setSaida(-1);
@@ -71,8 +77,8 @@ public class Dia  {
     }
     
     /**
-     * 
-     * @param dia 
+     * Método que imprime as transações deste dia. Serão mostrados o dia, tipo, valor e tag da transação
+     * @param dia Inteiro que servirá como uma identificação do dia, pois nem todos os dias terão necessáriamente uma transação.
      */
     public void listDia(int dia) {
         if(this.transacoes.size()!=0)
@@ -88,7 +94,9 @@ public class Dia  {
     }
     
     /**
-     * @param valor the value that has been received
+     * @param valor O valor da entrada (total) deste dia
+     * @deprecated Substituída por novaTransação()
+     * @see #novaTransacao(boolean, float, java.lang.String)
      */
     public void setEntrada(float valor) {
         if(valor == -1){
@@ -100,7 +108,9 @@ public class Dia  {
     }
 
     /**
-     * @param valor the value that has been paid
+     * @param valor O valor da saída (total) deste dia
+     * @deprecated Substituída por novaTransação()
+     * @see #novaTransacao(boolean, float, java.lang.String)
      */
     public void setSaida(float valor) {
         if(valor == -1){
@@ -112,7 +122,7 @@ public class Dia  {
     }
     
     /**
-     * 
+     * Constrói este dia com entradas e saídas inicialmente nulas
      */
     public Dia() {
         entrada = 0;

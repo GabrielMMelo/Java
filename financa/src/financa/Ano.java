@@ -8,8 +8,9 @@ package financa;
 import java.util.ArrayList;
 
 /**
- *
+ *  Classe filha de Mes que referencia a um determinado ano de controle financeiro do usuário. É a classe usada na main() para a manipulação dos dados financeiros
  * @author GabrielMMelo
+ * @see Mes
  */
 public class Ano extends Mes {
     ArrayList<Mes> meses = new ArrayList();
@@ -28,8 +29,8 @@ public class Ano extends Mes {
     }
     
     /**
-     * 
-     * @return 
+     * Método que informa a entrada total de um ano
+     * @return Entrada Total
      */
     @Override
     public float getEntrada() {
@@ -41,9 +42,10 @@ public class Ano extends Mes {
     }
     
     /**
-     * 
+     * Sobrecarga de método.
      * @param mes Mês da transação 
-     * @return 
+     * @return A entrada total de um determinado mês quisto
+     * @see #getEntrada() 
      */
     public float getEntrada(int mes) {
         return  meses.get(mes-1).getEntrada();
@@ -51,17 +53,19 @@ public class Ano extends Mes {
     
     /**
      * 
+     * Sobrecarga de método.
      * @param mes Mês da transação 
      * @param dia Dia da transação
-     * @return 
+     * @return A entrada total de um determinado dia quisto
+     * @see #getEntrada() 
      */
     public float getEntrada(int mes, int dia) {
         return  meses.get(mes-1).dias.get(dia-1).getEntrada();
     }
     
     /**
-     * 
-     * @return 
+     * Método que informa a saída total de um ano 
+     * @return Saída total
      */
     @Override
     public float getSaida() {
@@ -73,19 +77,19 @@ public class Ano extends Mes {
     }
     
     /**
-     * 
+     * Sobrecarga de método
      * @param mes Mês da transação 
-     * @return 
+     * @return A saída total de um determinado mês quisto
      */
      public float getSaida(int mes) {
         return  meses.get(mes-1).getSaida();
     }
     
     /**
-     * 
+     * Sobrecarga de método.
      * @param mes Mês da transação 
      * @param dia Dia da transação
-     * @return 
+     * @return A saída total de um determinado dia quisto
      */
     public float getSaida(int mes, int dia) {
         return  meses.get(mes-1).dias.get(dia-1).getSaida();
@@ -97,7 +101,7 @@ public class Ano extends Mes {
      * @param dia Dia da transação
      * @param tipo Tipo da transação ("Saida" ou "Entrada")
      * @param valor Quantia (em R$) referente à transação
-     * @param tag Tag <> que identifica a natureza da transação
+     * @param tag Tag que identifica a natureza da transação
      */
     public void novaTransacao(int mes, int dia,boolean tipo, float valor, String tag) {
         this.meses.get(mes-1).novaTransacao(dia,tipo, valor, tag);
@@ -107,7 +111,7 @@ public class Ano extends Mes {
      *  Insere nova transação usando dia de hoje como data
      * @param tipo Tipo da transação ("Saida" ou "Entrada")
      * @param valor Quantia (em R$) referente à transação
-     * @param tag Tag <> que identifica a natureza da transação
+     * @param tag Tag que identifica a natureza da transação
      */
     @Override
     public void novaTransacao(boolean tipo, float valor, String tag) {

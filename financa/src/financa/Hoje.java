@@ -9,13 +9,13 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- *
+ * Classe responsável pela manipulação da data e hora atual 
  * @author GabrielMMelo
  */
 public class Hoje {
     /**
-     * 
-     * @return 
+     * Metodo que retorna a data atual em um vetor de inteiros
+     * @return Vetor que contém a data atual no seguinte formato dd/mm/aa. A primeira posição do vetor recebe o dia, a segunda o mes e a terceira o ano.
      */
     public int[] getHoje(){
         Date dataAtual= new Date();
@@ -26,8 +26,8 @@ public class Hoje {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo que retorna a hora atual em um vetor de inteiros
+     * @return Vetor que contém a hora atual no seguinte formato hh:mm:ss. A primeira posição do vetor recebe aa horas, a segunda os minutos e a terceira os segundos.
      */
     public int[] getAgora(){
         Date dataAtual= new Date();
@@ -38,8 +38,8 @@ public class Hoje {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo que retorna a hora atual em uma string
+     * @return String que contém a hora atual no seguinte formato hh:mm:ss.
      */
     public String getStrAgora(){
         Date dataAtual= new Date();

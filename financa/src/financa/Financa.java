@@ -8,13 +8,13 @@ package financa;
 import java.util.ArrayList;
 
 /**
- *
+ * Função principal de validação.
  * @author GabrielMMelo
  */
 public class Financa {
     
     /**
-     * @param args the command line arguments
+     * @param args Os argumentos da linha de comando
      */
     public static void main(String[] args) {
         ArrayList <Ano> ano = new ArrayList();
@@ -26,6 +26,10 @@ public class Financa {
         Menu.menu(); 
     }
     
+    /**
+     *  Método POLIMÓRFICO que informa o saldo (Entrada - Saida), em R$, de um dia, mês ou ano informado.
+     * @param dia Dia, mês ou ano a ser consultado
+     */
     public static void getSaldo(Dia dia){
         float entrada = dia.getEntrada();
         float saida = dia.getSaida();
