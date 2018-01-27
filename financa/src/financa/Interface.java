@@ -6,23 +6,81 @@
 package financa;
 
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import java.util.ArrayList;
+
+
 
 /**
  * Classe responsável pelo tratamento das entradas do usuário e a exibição das saídas que guiam a interação com o usuário.
  * @author GabrielMMelo
  */
-public class Interface {
-    Scanner sc = new Scanner(System.in); 
+public class Interface implements ActionListener {
+    Scanner sc = new Scanner(System.in);  
     Ano ano;
-    
+    ArrayList <JButton> botao;
+    private ArrayList <JFrame> janelas = new ArrayList();
+   
     /**
      * 
      * @param ano Ano em que as operações referem
      */
     public Interface(Ano ano){
+       
+        janelas.add(criaJanela(1));
         this.ano = ano;
     }
     
+    public void exibir(int id) {
+        janelas.get(id-1).setVisible(true);
+    }
+    
+    private JFrame criaJanela(int id ) {
+        botao = new ArrayList();
+        JFrame janela;
+        switch(id){
+            case 1:
+                janela = new JFrame("Controle Pessoal de Finanças");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Nova Transação"));
+                botao.add(criaBotao("Listar Transações"));
+                botao.add(criaBotao("Sobre"));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                janela.add(botao.get(2));
+                return janela;
+            default:         
+        }
+        janela = new JFrame("erro");
+        return janela;
+    }
+    
+    private JButton criaBotao(String label){
+        JButton b = new JButton(label);
+        b.addActionListener(this);
+        return b;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Component component = (Component) e.getSource();
+        JFrame frame = (JFrame) SwingUtilities.getRoot(component);
+        if (e.getSource() == botao.get(0)){
+            JOptionPane.showMessageDialog(frame, "Botão 1!!!");
+        }
+        
+        else if (e.getSource() == botao.get(1)){
+            JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(frame, "Botão 3!!!");
+        } 
+    }
     /**
      * Método que realiza todas as interações com o usuário
      */

@@ -23,6 +23,7 @@ public class Financa {
         Ano anoAux = new Ano(String.valueOf(data[2]));
         ano.add(anoAux);
         Interface Menu = new Interface(anoAux);
+        Menu.exibir(1);
         Menu.menu(); 
     }
     
