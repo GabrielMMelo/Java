@@ -23,21 +23,25 @@ public class Interface implements ActionListener {
     ArrayList <JButton> botao;
     private ArrayList <JFrame> janelas = new ArrayList();
     private ArrayList <String> texts = new ArrayList();
-    private ArrayList <JTextField> tf = new ArrayList();
-    private static final int janelas_size = 10;
+   // private ArrayList <JTextField> ta = new ArrayList();
+    private ArrayList <JTextArea> ta = new ArrayList();
+    private static final int janelas_size = 11;
     public static String newline = System.getProperty("line.separator");
+    //private JTextArea ta = new JTextArea();
     
     /**
      * 
      * @param ano Ano em que as operações referem
      */
     public Interface(Ano ano){
-        tf.add(criaTextField("Data: (dd/mm)"));
-        tf.add(criaTextField("Valor: (R$)"));
-        tf.add(criaTextField("TAG"));
-        tf.add(criaTextField("Data: (dd/mm)"));
-        tf.add(criaTextField("Data: (mm)"));
-        tf.add(criaTextField(""));
+        ta.add(criaTextField("Data: (dd/mm)"));
+        ta.add(criaTextField("Valor: (R$)"));
+        ta.add(criaTextField("TAG"));
+        ta.add(criaTextField("Data: (dd/mm)"));
+        ta.add(criaTextField("Data: (mm)"));
+        ta.add(criaTextField(""));
+        ta.add(criaTextField(""));
+        ta.add(criaTextField(""));
         
         
         for (int i = 1; i <= janelas_size; i++){
@@ -56,10 +60,18 @@ public class Interface implements ActionListener {
         janelas.get(id-1).setVisible(false);
     }
     
+    private JTextArea criaTextField(String name){
+        JTextArea t = new JTextArea(name); 
+        return t;
+    }
+    /*
+    
     private JTextField criaTextField(String name){
         JTextField t = new JTextField(name); 
         return t;
     }
+    */
+    
     private JFrame criaJanela(int id ) {
         botao = new ArrayList();
         JFrame janela;
@@ -110,7 +122,7 @@ public class Interface implements ActionListener {
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
-                janela.add(tf.get(0));
+                janela.add(ta.get(0));
                 janela.add(botao.get(0));
                 janela.add(botao.get(1));
                 return janela;
@@ -122,9 +134,9 @@ public class Interface implements ActionListener {
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Valor:", SwingConstants.LEFT));
-                janela.add(tf.get(1));
+                janela.add(ta.get(1));
                 janela.add(new JLabel("TAG", SwingConstants.LEFT));
-                janela.add(tf.get(2));
+                janela.add(ta.get(2));
                 janela.add(botao.get(0));
                 janela.add(botao.get(1));
                 return janela;
@@ -147,9 +159,8 @@ public class Interface implements ActionListener {
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
-                JTextField t = new JTextField("oi");
                 janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
-                janela.add(tf.get(3));
+                janela.add(ta.get(3));
                 janela.add(botao.get(0));
                 janela.add(botao.get(1));
                 return janela;
@@ -161,7 +172,7 @@ public class Interface implements ActionListener {
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Data (mm)", SwingConstants.LEFT));
-                janela.add(tf.get(4));
+                janela.add(ta.get(4));
                 janela.add(botao.get(0));
                 janela.add(botao.get(1));
                 return janela;
@@ -171,7 +182,7 @@ public class Interface implements ActionListener {
                 janela.setSize(400, 300);
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));                            
                 botao.add(criaBotao("Ok"));
-                janela.add(tf.get(5));
+                janela.add(ta.get(5));
                 janela.add(botao.get(0));
                 return janela;
             case 10:
@@ -179,19 +190,36 @@ public class Interface implements ActionListener {
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 janela.setSize(400, 300);
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
-                botao.add(criaBotao("Nova Transação"));
-                botao.add(criaBotao("Buscar Transações"));
-                botao.add(criaBotao("Listar Transações"));
+                janela.add(ta.get(6));
+                ano.listAno();
+                Financa financa = new Financa();
+                System.out.println("");
+                System.out.print("Saldo anual: ");
+                financa.getSaldo(ano);
+                System.out.println("");
+                System.out.println("");
                 botao.add(criaBotao("Sobre"));
                 janela.add(botao.get(0));
-                janela.add(botao.get(1));
-                janela.add(botao.get(2));
-                janela.add(botao.get(3));
+
                 return janela;
-            default:         
+            case 11:
+                janela = new JFrame("Controle Pessoal de Finanças");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(800, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.add(ta.get(7));
+                botao.add(criaBotao("Voltar"));
+                ta.get(7).append("Este software foi desenvolvido por Gabriel Marques de Melo para a disciplina Praticas de Programacao Orientada a");
+                ta.get(7).append(newline+"Objetos, disciplina obrigatoria da grade de Ciencia da Computacao-Bacharelado da Universidade Federal de Lavras");
+                ta.get(7).append(newline+newline+"Codigo-fonte disponivel no repositorio:  github.com/GabrielMMelo/java");
+                janela.add(botao.get(0));
+                return janela;
+                
+            default:  
+                janela = new JFrame("erro");
+                return janela;
         }
-        janela = new JFrame("erro");
-        return janela;
+        
     }
     
     private JButton criaBotao(String label){
@@ -223,13 +251,12 @@ public class Interface implements ActionListener {
             
             else if ("Listar Transações".equals(e.getActionCommand())){
                 //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
-                this.exibir(6);
+                this.exibir(10);
                 this.esconder(1);
             }
             
             else {
-                JOptionPane.showMessageDialog(frame, e.getSource().toString());
-                this.exibir(2);
+                this.exibir(11);
                 this.esconder(1);
             } 
         }
@@ -245,7 +272,6 @@ public class Interface implements ActionListener {
             else if ("Nova Transação Passada/Futura".equals(e.getActionCommand())){
                 this.exibir(4);
                 this.esconder(2);
-                //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
             }
 
             else {
@@ -259,7 +285,6 @@ public class Interface implements ActionListener {
         
             if ("Saída".equals(e.getActionCommand())){
                 texts.add("true");
-                //JOptionPane.showMessageDialog(frame, "Botão 1!!!");
                 this.exibir(5);
                 this.esconder(3);
 
@@ -267,7 +292,8 @@ public class Interface implements ActionListener {
 
             else if ("Entrada".equals(e.getActionCommand())){
                 texts.add("false");
-                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+                this.exibir(5);
+                this.esconder(3);
             }
 
             else {
@@ -282,7 +308,7 @@ public class Interface implements ActionListener {
         
             if ("Avançar".equals(e.getActionCommand())){
                 //JOptionPane.showMessageDialog(frame, "Botão 1!!!");
-                String str = tf.get(0).getText();
+                String str = ta.get(0).getText();
                 String Data[] =  str.split("/");
                 texts.add(Data[1]);
                 texts.add(Data[0]);
@@ -291,13 +317,9 @@ public class Interface implements ActionListener {
 
             }
 
-            else if (e.getSource() == botao.get(1)){
-                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
-            }
-
             else {
                 this.exibir(2);
-                this.esconder(3);
+                this.esconder(4);
                 
             } 
         }
@@ -305,15 +327,19 @@ public class Interface implements ActionListener {
         else if (frame == janelas.get(4)) {      //  PÁGINA 5  
         
             if ("Avançar".equals(e.getActionCommand())){
-                boolean tipo = Boolean.parseBoolean(texts.get(2));
-                float valor = Float.parseFloat(tf.get(1).getText());
-                String tag = tf.get(2).getText();
                 
-                if (texts.size() == 3)                    
+                float valor = Float.parseFloat(ta.get(1).getText());
+                String tag = ta.get(2).getText();
+                
+                if (texts.size() == 3){
+                    boolean tipo = Boolean.parseBoolean(texts.get(2));
                     ano.novaTransacao(Integer.parseInt(texts.get(0)),Integer.parseInt(texts.get(1)),tipo,valor,tag);               
-                else     
+                }
+                
+                else{     
+                    boolean tipo = Boolean.parseBoolean(texts.get(0));
                     ano.novaTransacao(tipo,valor,tag);
-               
+                }
                 JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
                 texts.clear();
                 this.exibir(1);
@@ -322,14 +348,18 @@ public class Interface implements ActionListener {
             }           
 
             else {
-                texts.remove(2);
+                if (texts.size() == 3)
+                    texts.remove(2);
+                else
+                    texts.remove(0);
+                
                 this.exibir(3);
                 this.esconder(5);
                 
             } 
         }
         
-        else if (frame == janelas.get(5)) {      //  Pagina principal
+        else if (frame == janelas.get(5)) {      //  PÁGINA 6
         
             if ("Buscar por dia".equals(e.getActionCommand())){
                 //JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
@@ -345,20 +375,18 @@ public class Interface implements ActionListener {
             }
 
             else {
-                this.exibir(3);
-                this.esconder(5);
+                this.exibir(1);
+                this.esconder(6);
                 
             } 
         }
         
-        else if (frame == janelas.get(6)) {      //  Pagina principal
+        else if (frame == janelas.get(6)) {      //  PÁGINA 7
         
             if ("Avançar".equals(e.getActionCommand())){
                // JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
                
-                String str = tf.get(3).getText();
-                JOptionPane.showMessageDialog(frame, str);
-               
+                String str = ta.get(3).getText();
                 String Data[] =  str.split("/");       
                 float saida = ano.getSaida(Integer.parseInt(Data[1]),Integer.parseInt(Data[0]));
                 float entrada = ano.getEntrada(Integer.parseInt(Data[1]),Integer.parseInt(Data[0]));
@@ -377,10 +405,9 @@ public class Interface implements ActionListener {
                 
                 str = texts.get(0)+newline+texts.get(1)+newline+texts.get(2);
                 texts.clear();
-                tf.get(5).setText(str);
+                ta.get(5).setText(str);
                 //janelas.get(8)
                 this.exibir(9);
-                
                 this.esconder(7);
 
             }
@@ -392,44 +419,57 @@ public class Interface implements ActionListener {
             } 
         }
         
-        else if (frame == janelas.get(7)) {      //  Pagina principal
+        else if (frame == janelas.get(7)) {      //  PÁGINA 8
         
             if ("Avançar".equals(e.getActionCommand())){
-                JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
-                this.exibir(1);
-                this.esconder(5);
+                
+                int mes = Integer.parseInt(ta.get(4).getText());
+                float saida = ano.getSaida(mes);
+                float entrada = ano.getEntrada(mes);
+                texts.add("Saída: R$" + saida);
+                texts.add("Entrada: R$" + entrada);
+                float total = entrada - saida;
+                if (total <0) {
+                    total *= -1;
+                    texts.add("Saldo total: -R$" + total);
+                }
+                else
+                    texts.add("Saldo total: R$" + total);
+                            
+                String str = texts.get(0)+newline+texts.get(1)+newline+texts.get(2);
+                texts.clear();
+                ta.get(5).setText(str);         
+                this.exibir(9);
+                this.esconder(8);
 
-            }
-
-            else if (e.getSource() == botao.get(1)){
-                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
             }
 
             else {
-                this.exibir(3);
-                this.esconder(5);
+                this.exibir(6);
+                this.esconder(8);
                 
             } 
         }
         
-        else if (frame == janelas.get(8)) {      //  Pagina principal
+        else if (frame == janelas.get(8)) {      //  PÁGINA 9
+            texts.clear();
+            this.exibir(1);
+            this.esconder(9);
+
+        }
         
-            if ("Avançar".equals(e.getActionCommand())){
-                JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
-                this.exibir(1);
-                this.esconder(5);
+        else if (frame == janelas.get(9)) {      //  PÁGINA 10
+            texts.clear();
+            this.exibir(1);
+            this.esconder(9);
 
-            }
+        }
+        
+        else if (frame == janelas.get(10)) {      //  PÁGINA 11
+            
+            this.exibir(1);
+            this.esconder(11);
 
-            else if (e.getSource() == botao.get(1)){
-                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
-            }
-
-            else {
-                this.exibir(3);
-                this.esconder(5);
-                
-            } 
         }
         
     }
@@ -644,8 +684,8 @@ public class Interface implements ActionListener {
     public void sobre(){
         clearScreen();
         System.out.println("        $$$$$ SOBRE $$$$$");
-        System.out.println("        Este software foi desenvolvido por Gabriel Marques de Melo para a disciplina Praticas de Programação Orientada a");
-        System.out.println("        Objetos, disciplina obrigatoria da grade de Ciencia da Computaçao-Bacharelado da Universidade Federal de Lavras");
+        System.out.println("        Este software foi desenvolvido por Gabriel Marques de Melo para a disciplina Praticas de Programacao Orientada a");
+        System.out.println("        Objetos, disciplina obrigatoria da grade de Ciencia da Computacao-Bacharelado da Universidade Federal de Lavras");
         System.out.println("");
         System.out.println("Codigo-fonte disponivel no repositorio:  github.com/GabrielMMelo/java");
         System.out.println("");
