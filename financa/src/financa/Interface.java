@@ -22,36 +22,171 @@ public class Interface implements ActionListener {
     Ano ano;
     ArrayList <JButton> botao;
     private ArrayList <JFrame> janelas = new ArrayList();
-   
+    private ArrayList <String> texts = new ArrayList();
+    private ArrayList <JTextField> tf = new ArrayList();
+    private static final int janelas_size = 10;
+    public static String newline = System.getProperty("line.separator");
+    
     /**
      * 
      * @param ano Ano em que as operações referem
      */
     public Interface(Ano ano){
-       
-        janelas.add(criaJanela(1));
+        tf.add(criaTextField("Data: (dd/mm)"));
+        tf.add(criaTextField("Valor: (R$)"));
+        tf.add(criaTextField("TAG"));
+        tf.add(criaTextField("Data: (dd/mm)"));
+        tf.add(criaTextField("Data: (mm)"));
+        tf.add(criaTextField(""));
+        
+        
+        for (int i = 1; i <= janelas_size; i++){
+            janelas.add(criaJanela(i));
+        }
+
         this.ano = ano;
+        this.exibir(1);
     }
     
     public void exibir(int id) {
         janelas.get(id-1).setVisible(true);
     }
     
+    public void esconder(int id) {
+        janelas.get(id-1).setVisible(false);
+    }
+    
+    private JTextField criaTextField(String name){
+        JTextField t = new JTextField(name); 
+        return t;
+    }
     private JFrame criaJanela(int id ) {
         botao = new ArrayList();
         JFrame janela;
         switch(id){
             case 1:
-                janela = new JFrame("Controle Pessoal de Finanças");
+                janela = new JFrame("Controle Pessoal de Finanças");    //PAGINA PRINCIPAL
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 janela.setSize(400, 300);
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
                 botao.add(criaBotao("Nova Transação"));
+                botao.add(criaBotao("Buscar Transações"));
                 botao.add(criaBotao("Listar Transações"));
                 botao.add(criaBotao("Sobre"));
                 janela.add(botao.get(0));
                 janela.add(botao.get(1));
                 janela.add(botao.get(2));
+                janela.add(botao.get(3));
+                return janela;
+            case 2:
+                janela = new JFrame("Nova Transação");                  // PAGINA 2
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Nova Transação de hoje"));
+                botao.add(criaBotao("Nova Transação Passada/Futura"));
+                botao.add(criaBotao("Voltar"));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                janela.add(botao.get(2));
+                return janela;
+            case 3:
+                janela = new JFrame("Nova Transação de Hoje");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Saída"));
+                botao.add(criaBotao("Entrada"));
+                botao.add(criaBotao("Voltar"));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                janela.add(botao.get(2));
+                return janela;
+            case 4:
+                janela = new JFrame("Nova Transação Passada/Futura");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Avançar"));              
+                botao.add(criaBotao("Voltar"));
+                janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
+                janela.add(tf.get(0));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                return janela;
+            case 5:
+                janela = new JFrame("Nova Transação");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Avançar"));              
+                botao.add(criaBotao("Voltar"));
+                janela.add(new JLabel("Valor:", SwingConstants.LEFT));
+                janela.add(tf.get(1));
+                janela.add(new JLabel("TAG", SwingConstants.LEFT));
+                janela.add(tf.get(2));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                return janela;
+            case 6:
+                janela = new JFrame("Buscar Transação");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Buscar por dia"));
+                botao.add(criaBotao("Buscar por mês"));
+                botao.add(criaBotao("Voltar"));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                janela.add(botao.get(2));
+                return janela;
+            case 7:
+                janela = new JFrame("Buscar Transação por dia");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Avançar"));              
+                botao.add(criaBotao("Voltar"));
+                JTextField t = new JTextField("oi");
+                janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
+                janela.add(tf.get(3));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                return janela;
+            case 8:
+                janela = new JFrame("Buscar Transação por mês");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Avançar"));              
+                botao.add(criaBotao("Voltar"));
+                janela.add(new JLabel("Data (mm)", SwingConstants.LEFT));
+                janela.add(tf.get(4));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                return janela;
+            case 9:
+                janela = new JFrame("Controle Pessoal de Finanças");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));                            
+                botao.add(criaBotao("Ok"));
+                janela.add(tf.get(5));
+                janela.add(botao.get(0));
+                return janela;
+            case 10:
+                janela = new JFrame("Controle Pessoal de Finanças");
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(400, 300);
+                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                botao.add(criaBotao("Nova Transação"));
+                botao.add(criaBotao("Buscar Transações"));
+                botao.add(criaBotao("Listar Transações"));
+                botao.add(criaBotao("Sobre"));
+                janela.add(botao.get(0));
+                janela.add(botao.get(1));
+                janela.add(botao.get(2));
+                janela.add(botao.get(3));
                 return janela;
             default:         
         }
@@ -62,6 +197,7 @@ public class Interface implements ActionListener {
     private JButton criaBotao(String label){
         JButton b = new JButton(label);
         b.addActionListener(this);
+        b.setActionCommand(label);
         return b;
     }
     
@@ -69,17 +205,233 @@ public class Interface implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Component component = (Component) e.getSource();
         JFrame frame = (JFrame) SwingUtilities.getRoot(component);
-        if (e.getSource() == botao.get(0)){
-            JOptionPane.showMessageDialog(frame, "Botão 1!!!");
+        
+        if (frame == janelas.get(0)) {      //  Pagina principal
+        
+            if ("Nova Transação".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Botão 1!!!");
+                this.exibir(2);
+                this.esconder(1);
+
+            }
+
+            else if ("Buscar Transações".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+                this.exibir(6);
+                this.esconder(1);
+            }
+            
+            else if ("Listar Transações".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+                this.exibir(6);
+                this.esconder(1);
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(frame, e.getSource().toString());
+                this.exibir(2);
+                this.esconder(1);
+            } 
         }
         
-        else if (e.getSource() == botao.get(1)){
-            JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+        else if (frame == janelas.get(1)) {      //  PAGINA 2
+        
+            if ("Nova Transação de hoje".equals(e.getActionCommand())){
+                this.exibir(3);
+                this.esconder(2);
+
+            }
+
+            else if ("Nova Transação Passada/Futura".equals(e.getActionCommand())){
+                this.exibir(4);
+                this.esconder(2);
+                //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+            }
+
+            else {
+                this.exibir(1);
+                this.esconder(2);
+                
+            } 
         }
         
-        else {
-            JOptionPane.showMessageDialog(frame, "Botão 3!!!");
-        } 
+        else if (frame == janelas.get(2)) {      // PÁGINA 3
+        
+            if ("Saída".equals(e.getActionCommand())){
+                texts.add("true");
+                //JOptionPane.showMessageDialog(frame, "Botão 1!!!");
+                this.exibir(5);
+                this.esconder(3);
+
+            }
+
+            else if ("Entrada".equals(e.getActionCommand())){
+                texts.add("false");
+                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+            }
+
+            else {
+                texts.clear();
+                this.exibir(2);
+                this.esconder(3);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(3)) {      //  PÁGINA 4
+        
+            if ("Avançar".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Botão 1!!!");
+                String str = tf.get(0).getText();
+                String Data[] =  str.split("/");
+                texts.add(Data[1]);
+                texts.add(Data[0]);
+                this.exibir(3);
+                this.esconder(4);
+
+            }
+
+            else if (e.getSource() == botao.get(1)){
+                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+            }
+
+            else {
+                this.exibir(2);
+                this.esconder(3);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(4)) {      //  PÁGINA 5  
+        
+            if ("Avançar".equals(e.getActionCommand())){
+                boolean tipo = Boolean.parseBoolean(texts.get(2));
+                float valor = Float.parseFloat(tf.get(1).getText());
+                String tag = tf.get(2).getText();
+                
+                if (texts.size() == 3)                    
+                    ano.novaTransacao(Integer.parseInt(texts.get(0)),Integer.parseInt(texts.get(1)),tipo,valor,tag);               
+                else     
+                    ano.novaTransacao(tipo,valor,tag);
+               
+                JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
+                texts.clear();
+                this.exibir(1);
+                this.esconder(5);
+
+            }           
+
+            else {
+                texts.remove(2);
+                this.exibir(3);
+                this.esconder(5);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(5)) {      //  Pagina principal
+        
+            if ("Buscar por dia".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
+                this.exibir(7);
+                this.esconder(6);
+
+            }
+
+            else if ("Buscar por mês".equals(e.getActionCommand())){
+                //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+                this.exibir(8);
+                this.esconder(6);
+            }
+
+            else {
+                this.exibir(3);
+                this.esconder(5);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(6)) {      //  Pagina principal
+        
+            if ("Avançar".equals(e.getActionCommand())){
+               // JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
+               
+                String str = tf.get(3).getText();
+                JOptionPane.showMessageDialog(frame, str);
+               
+                String Data[] =  str.split("/");       
+                float saida = ano.getSaida(Integer.parseInt(Data[1]),Integer.parseInt(Data[0]));
+                float entrada = ano.getEntrada(Integer.parseInt(Data[1]),Integer.parseInt(Data[0]));
+                texts.add("Saída: R$" + saida);
+                texts.add("Entrada: R$" + entrada);
+                //System.out.println("Saída: R$"+ saida);
+                //System.out.println("Entrada: R$"+entrada);
+                float total2 = entrada - saida;
+                if (total2 <0) {
+                    total2 *= -1;
+                    texts.add("Saldo total: R$" + total2);
+                    //System.out.println("Saldo total: -R$" + total2);
+                }
+                else
+                    texts.add("Saldo total: R$" + total2);
+                
+                str = texts.get(0)+newline+texts.get(1)+newline+texts.get(2);
+                texts.clear();
+                tf.get(5).setText(str);
+                //janelas.get(8)
+                this.exibir(9);
+                
+                this.esconder(7);
+
+            }
+
+            else {
+                this.exibir(6);
+                this.esconder(7);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(7)) {      //  Pagina principal
+        
+            if ("Avançar".equals(e.getActionCommand())){
+                JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
+                this.exibir(1);
+                this.esconder(5);
+
+            }
+
+            else if (e.getSource() == botao.get(1)){
+                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+            }
+
+            else {
+                this.exibir(3);
+                this.esconder(5);
+                
+            } 
+        }
+        
+        else if (frame == janelas.get(8)) {      //  Pagina principal
+        
+            if ("Avançar".equals(e.getActionCommand())){
+                JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
+                this.exibir(1);
+                this.esconder(5);
+
+            }
+
+            else if (e.getSource() == botao.get(1)){
+                JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+            }
+
+            else {
+                this.exibir(3);
+                this.esconder(5);
+                
+            } 
+        }
+        
     }
     /**
      * Método que realiza todas as interações com o usuário
