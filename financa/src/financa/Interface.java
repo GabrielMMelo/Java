@@ -200,7 +200,6 @@ public class Interface implements ActionListener {
                 System.out.println("");
                 botao.add(criaBotao("Sobre"));
                 janela.add(botao.get(0));
-
                 return janela;
             case 11:
                 janela = new JFrame("Controle Pessoal de Finanças");
