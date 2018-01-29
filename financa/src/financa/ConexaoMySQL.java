@@ -153,7 +153,6 @@ public class ConexaoMySQL {
         }
         comando.close();
         conexao.close();
-        System.out.println(str);
         return str;
     }
             

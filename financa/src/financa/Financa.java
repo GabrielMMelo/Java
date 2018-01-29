@@ -6,7 +6,6 @@
 package financa;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * Função principal de validação.
@@ -19,10 +18,7 @@ public class Financa {
      * @throws SQLException Exceções SQL
      */
     public static void main(String[] args) throws SQLException {
-        
         Interface Menu = new Interface();
-        //Menu.exibir(1);
-        //Menu.menu(); 
     }
     
     /**
@@ -36,12 +32,10 @@ public class Financa {
         float total = entrada - saida;
         String str;
         if (total <0) {
-            total *= -1;
-            //System.out.print("-R$"+total);      
+            total *= -1; 
             str = "-R$"+total;
         }
         else
-            //System.out.print("R$"+total);  
             str = "R$"+total;
         return str;
     }

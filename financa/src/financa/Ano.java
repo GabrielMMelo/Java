@@ -131,10 +131,8 @@ public class Ano extends Mes {
      */
     public String listAno() {
         String str;
-        //System.out.println(ano+":");
         str = ano+":";
       for (int i = 0; i < meses.size(); i++) {
-          //System.out.println(converteMes(i));
           str+=newline;
           str+=newline;
           str+=converteMes(i);
