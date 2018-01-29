@@ -80,17 +80,27 @@ public class Dia  {
      * Método que imprime as transações deste dia. Serão mostrados o dia, tipo, valor e tag da transação
      * @param dia Inteiro que servirá como uma identificação do dia, pois nem todos os dias terão necessáriamente uma transação.
      */
-    public void listDia(int dia) {
-        if(this.transacoes.size()!=0)
-            System.out.print("      Dia "+ dia + ": ");
+    public String listDia(int dia) {
+        String str = "";
+        if(this.transacoes.size()!=0){
+            //System.out.print("      Dia "+ dia + ": ");
+            str += "      Dia "+ dia + ": ";
+        }
         for (int i = 0; i < transacoes.size(); i++) {
             if(i==0)
-                System.out.print(transacoes.get(i).getTipo() + " de ");  
+                //System.out.print(transacoes.get(i).getTipo() + " de ");
+                str += transacoes.get(i).getTipo() + " de ";
             else
-                System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
-            System.out.print("R$"+transacoes.get(i).getValor()+ " ");
-            System.out.println("<"+transacoes.get(i).getTag()+">");
-        }  
+                //System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
+                str+=transacoes.get(i).getTipo() + " de ";
+           // System.out.print("R$"+transacoes.get(i).getValor()+ " ");
+            str+="R$"+transacoes.get(i).getValor()+ " ";
+           // System.out.println("<"+transacoes.get(i).getTag()+">");
+            str+="<"+transacoes.get(i).getTag()+">";
+        }
+        System.out.println(str);
+        str+= "\r";
+        return str;
     }
     
     /**

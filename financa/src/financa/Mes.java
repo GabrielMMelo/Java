@@ -89,10 +89,13 @@ public class Mes extends Dia {
     /**
      * Método que informa todas as transações de um mês
      */
-     public void listMes() {
+     public String listMes() {
+         String str = "";
       for (int i = 0; i < dias.size(); i++) {
-          dias.get(i).listDia(i+1);
-        }  
+          str+= dias.get(i).listDia(i+1);
+        } 
+      str += "\r";
+      return str;
     }
     
 }

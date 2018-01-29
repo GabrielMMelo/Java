@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Ano extends Mes {
     ArrayList<Mes> meses = new ArrayList();
+    public static String newline = System.getProperty("line.separator");
     public String ano;
     
     /**
@@ -123,12 +124,20 @@ public class Ano extends Mes {
     /**
      * Imprime todas transações do ano
      */
-    public void listAno() {
-        System.out.println(ano+":");
+    public String listAno() {
+        String str;
+        //System.out.println(ano+":");
+        str = ano+":";
       for (int i = 0; i < meses.size(); i++) {
-          System.out.println(converteMes(i));
-          meses.get(i).listMes(); 
+          //System.out.println(converteMes(i));
+          str+=newline;
+          str+=newline;
+          str+=converteMes(i);
+          str+=newline;
+          str+=(meses.get(i).listMes()); 
       }
+      str+=("\r");
+      return str;
     }
     
     /**

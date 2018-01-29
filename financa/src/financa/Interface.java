@@ -9,7 +9,9 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.sql.*;
 
 
 
@@ -18,8 +20,11 @@ import java.util.ArrayList;
  * @author GabrielMMelo
  */
 public class Interface implements ActionListener {
-    Scanner sc = new Scanner(System.in);  
-    Ano ano;
+    private ConexaoMySQL sql = new ConexaoMySQL();
+    private Connection conexao;
+    Hoje hoje = new Hoje();
+    int data[] = hoje.getHoje();
+    Ano ano  = new Ano(String.valueOf(data[2]));
     ArrayList <JButton> botao;
     private ArrayList <JFrame> janelas = new ArrayList();
     private ArrayList <String> texts = new ArrayList();
@@ -33,7 +38,7 @@ public class Interface implements ActionListener {
      * 
      * @param ano Ano em que as operações referem
      */
-    public Interface(Ano ano){
+    public Interface() throws SQLException{
         ta.add(criaTextField("Data: (dd/mm)"));
         ta.add(criaTextField("Valor: (R$)"));
         ta.add(criaTextField("TAG"));
@@ -47,8 +52,16 @@ public class Interface implements ActionListener {
         for (int i = 1; i <= janelas_size; i++){
             janelas.add(criaJanela(i));
         }
-
-        this.ano = ano;
+        
+        
+        sql.insert("FEVEREIRO", "22", "7000", "8000", "'3'");
+        
+       // Statement comando = conexao.createStatement();
+      //  comando.executeUpdate("INSERT INTO TAG (tagId, descricao) VALUES (1, NULL);");
+       // comando.executeUpdate("INSERT INTO JANEIRO (dia, saida, entrada,tagId) VALUES (1, 20.0, 10.0, 1);");
+       // comando.close();
+       // conexao.close();
+       
         this.exibir(1);
     }
     
@@ -79,8 +92,8 @@ public class Interface implements ActionListener {
             case 1:
                 janela = new JFrame("Controle Pessoal de Finanças");    //PAGINA PRINCIPAL
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(4,2));
                 botao.add(criaBotao("Nova Transação"));
                 botao.add(criaBotao("Buscar Transações"));
                 botao.add(criaBotao("Listar Transações"));
@@ -93,8 +106,8 @@ public class Interface implements ActionListener {
             case 2:
                 janela = new JFrame("Nova Transação");                  // PAGINA 2
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(3,2));
                 botao.add(criaBotao("Nova Transação de hoje"));
                 botao.add(criaBotao("Nova Transação Passada/Futura"));
                 botao.add(criaBotao("Voltar"));
@@ -105,8 +118,8 @@ public class Interface implements ActionListener {
             case 3:
                 janela = new JFrame("Nova Transação de Hoje");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(3,2));
                 botao.add(criaBotao("Saída"));
                 botao.add(criaBotao("Entrada"));
                 botao.add(criaBotao("Voltar"));
@@ -117,8 +130,8 @@ public class Interface implements ActionListener {
             case 4:
                 janela = new JFrame("Nova Transação Passada/Futura");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(4,2));
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
@@ -129,8 +142,8 @@ public class Interface implements ActionListener {
             case 5:
                 janela = new JFrame("Nova Transação");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(5,2));
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Valor:", SwingConstants.LEFT));
@@ -143,8 +156,8 @@ public class Interface implements ActionListener {
             case 6:
                 janela = new JFrame("Buscar Transação");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+               janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(3,2));
                 botao.add(criaBotao("Buscar por dia"));
                 botao.add(criaBotao("Buscar por mês"));
                 botao.add(criaBotao("Voltar"));
@@ -155,8 +168,8 @@ public class Interface implements ActionListener {
             case 7:
                 janela = new JFrame("Buscar Transação por dia");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(4,2));
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Data (dd/mm)", SwingConstants.LEFT));
@@ -167,8 +180,8 @@ public class Interface implements ActionListener {
             case 8:
                 janela = new JFrame("Buscar Transação por mês");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(4,2));
                 botao.add(criaBotao("Avançar"));              
                 botao.add(criaBotao("Voltar"));
                 janela.add(new JLabel("Data (mm)", SwingConstants.LEFT));
@@ -179,33 +192,25 @@ public class Interface implements ActionListener {
             case 9:
                 janela = new JFrame("Controle Pessoal de Finanças");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));                            
+                janela.setSize(600, 400);
+                janela.setLayout(new GridLayout(3,2));                            
                 botao.add(criaBotao("Ok"));
                 janela.add(ta.get(5));
                 janela.add(botao.get(0));
                 return janela;
             case 10:
                 janela = new JFrame("Controle Pessoal de Finanças");
-                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(400, 300);
+                //janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                janela.setSize(500, 1000);
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                ta.get(6).setBackground(Color.white);
                 janela.add(ta.get(6));
-                ano.listAno();
-                Financa financa = new Financa();
-                System.out.println("");
-                System.out.print("Saldo anual: ");
-                financa.getSaldo(ano);
-                System.out.println("");
-                System.out.println("");
-                botao.add(criaBotao("Sobre"));
-                janela.add(botao.get(0));
                 return janela;
             case 11:
                 janela = new JFrame("Controle Pessoal de Finanças");
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(800, 300);
-                janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
+                janela.setSize(655, 400);
+                janela.setLayout(new GridLayout(2,4));
                 janela.add(ta.get(7));
                 botao.add(criaBotao("Voltar"));
                 ta.get(7).append("Este software foi desenvolvido por Gabriel Marques de Melo para a disciplina Praticas de Programacao Orientada a");
@@ -250,8 +255,13 @@ public class Interface implements ActionListener {
             
             else if ("Listar Transações".equals(e.getActionCommand())){
                 //JOptionPane.showMessageDialog(frame, "Botão 2!!!");
+                ta.get(6).setText("Saldo anual: ");
+                ta.get(6).append(ano.listAno());
+                Financa financa = new Financa();
+                ta.get(6).append(newline);
+                ta.get(6).append(financa.getSaldo(ano));
                 this.exibir(10);
-                this.esconder(1);
+               
             }
             
             else {
@@ -475,7 +485,7 @@ public class Interface implements ActionListener {
     /**
      * Método que realiza todas as interações com o usuário
      */
-    public void menu(){
+/*    public void menu(){
         System.out.println("          ****************************************");
         System.out.println("          $$$$$ CONTROLE PESSOAL DE FINANÇAS $$$$$");
         System.out.println("          ****************************************");
@@ -526,13 +536,13 @@ public class Interface implements ActionListener {
        }
     }
     
-    
+  */  
     /**
      * Método que auxilia método menu() para manipular as entradas e saídas para usuário usuário. Foi criado visando modularização do código.
      * @param operacao Uma das operações disponibilizadas no método menu()
      * * @see menu() 
      */
-    private void subMenu(int operacao){
+    /*private void subMenu(int operacao){
         switch(operacao){
             case 1:
                 
@@ -668,18 +678,19 @@ public class Interface implements ActionListener {
         }
         
     }
-    
+    */
     /**
      * Função que "limpa" a tela do console
      */
-    public static void clearScreen() {  
+    /*public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }
-    
+    */
     /**
      * Tela de informações sobre o projeto e o autor
      */
+    /*
     public void sobre(){
         clearScreen();
         System.out.println("        $$$$$ SOBRE $$$$$");
@@ -689,5 +700,5 @@ public class Interface implements ActionListener {
         System.out.println("Codigo-fonte disponivel no repositorio:  github.com/GabrielMMelo/java");
         System.out.println("");
         
-    }
+    }*/
 }
