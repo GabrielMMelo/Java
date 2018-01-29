@@ -12,6 +12,8 @@ import java.awt.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -54,8 +56,20 @@ public class Interface implements ActionListener {
         }
         
         
-        sql.insert("FEVEREIRO", "22", "7000", "8000", "'3'");
+        //sql.insert("FEVEREIRO", "22", "7000", "8000", "'3'");
         
+        sql.select(ano,"JANEIRO");
+        sql.select(ano,"FEVEREIRO");
+        sql.select(ano,"MARCO");
+        sql.select(ano,"ABRIL");
+        sql.select(ano,"MAIO");
+        sql.select(ano,"JUNHO");
+        sql.select(ano,"JULHO");
+        sql.select(ano,"AGOSTO");
+        sql.select(ano,"SETEMBRO");
+        sql.select(ano,"OUTUBRO");
+        sql.select(ano,"NOVEMBRO");
+        sql.select(ano,"DEZEMBRO");
        // Statement comando = conexao.createStatement();
       //  comando.executeUpdate("INSERT INTO TAG (tagId, descricao) VALUES (1, NULL);");
        // comando.executeUpdate("INSERT INTO JANEIRO (dia, saida, entrada,tagId) VALUES (1, 20.0, 10.0, 1);");
@@ -199,9 +213,9 @@ public class Interface implements ActionListener {
                 janela.add(botao.get(0));
                 return janela;
             case 10:
-                janela = new JFrame("Controle Pessoal de Finanças");
+                janela = new JFrame("Lista de Transações");
                 //janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.setSize(500, 1000);
+                janela.setSize(700, 1000);
                 janela.setLayout(new BoxLayout(janela.getContentPane(), BoxLayout.Y_AXIS));
                 ta.get(6).setBackground(Color.white);
                 janela.add(ta.get(6));
@@ -342,12 +356,46 @@ public class Interface implements ActionListener {
                 
                 if (texts.size() == 3){
                     boolean tipo = Boolean.parseBoolean(texts.get(2));
-                    ano.novaTransacao(Integer.parseInt(texts.get(0)),Integer.parseInt(texts.get(1)),tipo,valor,tag);               
+                    ano.novaTransacao(Integer.parseInt(texts.get(0)),Integer.parseInt(texts.get(1)),tipo,valor,tag);
+                    String table = ano.converteMes(Integer.parseInt(texts.get(0))-1);
+                    
+                    if (tipo) {
+                        try {
+                            sql.insert(table, Integer.parseInt(texts.get(1)), 0, valor, tag);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    else {
+                        try {
+                            sql.insert(table, Integer.parseInt(texts.get(1)), valor, 0, tag);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
                 
                 else{     
+                    
                     boolean tipo = Boolean.parseBoolean(texts.get(0));
                     ano.novaTransacao(tipo,valor,tag);
+                    String table = ano.converteMes(data[1]-1);
+                    //System.out.println(table);
+                    
+                    if (tipo) {
+                     try {
+                            sql.insert(table, data[0], 0, valor, tag);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                     }
+                    else {
+                        try {
+                            sql.insert(table, data[1], valor, 0, tag);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
                 JOptionPane.showMessageDialog(frame, "Transação concluída com sucesso!!!");
                 texts.clear();

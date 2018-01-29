@@ -22,6 +22,7 @@ public class Dia  {
      */
     protected float saida;
     ArrayList<Transacao> transacoes = new ArrayList();
+    public static String newline = System.getProperty("line.separator");
     
     /**
      *  Método que informa o total de entradas deste dia
@@ -82,25 +83,68 @@ public class Dia  {
      */
     public String listDia(int dia) {
         String str = "";
-        if(this.transacoes.size()!=0){
-            //System.out.print("      Dia "+ dia + ": ");
+        int init = 0;
+        if (transacoes.get(0).getValor() == 0.0 && transacoes.size() == 2)
+            return str;
+        if(!this.transacoes.isEmpty()){
+            System.out.print(transacoes.size());
             str += "      Dia "+ dia + ": ";
         }
-        for (int i = 0; i < transacoes.size(); i++) {
-            if(i==0)
-                //System.out.print(transacoes.get(i).getTipo() + " de ");
-                str += transacoes.get(i).getTipo() + " de ";
-            else
+         if (transacoes.get(0).getValor() == 0.0  &&  transacoes.get(1).getValor() != 0.0) {
+             init = 1;
+             for (int i = init; i < transacoes.size(); i++) {
+            
                 //System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
                 str+=transacoes.get(i).getTipo() + " de ";
+                // System.out.print("R$"+transacoes.get(i).getValor()+ " ");
+                str+="R$"+transacoes.get(i).getValor()+ " ";
+               // System.out.println("<"+transacoes.get(i).getTag()+">");
+                str+="<"+transacoes.get(i).getTag()+">";
+                str+=newline;
+            }
+           // System.out.println(str);
+            str+= "\r";
+            return str;
+         }
+         else if (transacoes.get(0).getValor() != 0.0  &&  transacoes.get(1).getValor() == 0.0) {
+             init = 2;
+            str+=transacoes.get(0).getTipo() + " de ";
            // System.out.print("R$"+transacoes.get(i).getValor()+ " ");
-            str+="R$"+transacoes.get(i).getValor()+ " ";
+            str+="R$"+transacoes.get(0).getValor()+ " ";
            // System.out.println("<"+transacoes.get(i).getTag()+">");
-            str+="<"+transacoes.get(i).getTag()+">";
-        }
-        System.out.println(str);
-        str+= "\r";
-        return str;
+            str+="<"+transacoes.get(0).getTag()+">";
+            for (int i = init; i < transacoes.size(); i++) {
+         
+                //System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
+                str+=transacoes.get(i).getTipo() + " de ";
+                // System.out.print("R$"+transacoes.get(i).getValor()+ " ");
+                 str+="R$"+transacoes.get(i).getValor()+ " ";
+                // System.out.println("<"+transacoes.get(i).getTag()+">");
+                 str+="<"+transacoes.get(i).getTag()+">";
+                 str+=newline;
+            }
+           // System.out.println(str);
+            str+= "\r";
+            return str;
+         }
+         
+         else {
+            init = 0;
+            for (int i = init; i < transacoes.size(); i++) {
+         
+                //System.out.print("             " + transacoes.get(i).getTipo() + " de ");  
+                str+=transacoes.get(i).getTipo() + " de ";
+                // System.out.print("R$"+transacoes.get(i).getValor()+ " ");
+                 str+="R$"+transacoes.get(i).getValor()+ " ";
+                // System.out.println("<"+transacoes.get(i).getTag()+">");
+                 str+="<"+transacoes.get(i).getTag()+">";
+                 str+=newline;
+            }
+           // System.out.println(str);
+            str+= "\r";
+            return str;
+                
+         }
     }
     
     /**

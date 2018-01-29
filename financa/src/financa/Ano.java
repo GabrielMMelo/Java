@@ -145,44 +145,44 @@ public class Ano extends Mes {
      * @param mes Número referente ao mês - 1 (Ex: mes = 1 -> retorna "Fevereiro")
      * @return Nome do mês
      */
-    private String converteMes(int mes) {
+    protected String converteMes(int mes) {
         String conversao="";
         switch(mes) {
               case 0:
-                  conversao = "  JANEIRO:"; 
+                  conversao = "JANEIRO"; 
                   break;
               case 1:
-                  conversao = "  FEVEREIRO:";
+                  conversao = "FEVEREIRO";
                   break;
               case 2:
-                  conversao = "  MARÇO:";
+                  conversao = "MARCO";
                   break;
               case 3:
-                  conversao = "  ABRIL:";
+                  conversao = "ABRIL";
                   break;    
               case 4:
-                  conversao = "  MAIO:";
+                  conversao = "MAIO";
                   break;
               case 5:
-                  conversao = "  JUNHO:";
+                  conversao = "JUNHO";
                   break;
               case 6:
-                  conversao = "  JULHO:";
+                  conversao = "JULHO";
                   break;
               case 7:
-                  conversao = "  AGOSTO:";
+                  conversao = "AGOSTO";
                   break;
               case 8:
-                  conversao = "  SETEMBRO:";
+                  conversao = "SETEMBRO";
                   break;
               case 9:
-                  conversao = "  OUTUBRO:";
+                  conversao = "OUTUBRO";
                   break;
               case 10:
-                  conversao = "  NOVEMBRO:";
+                  conversao = "NOVEMBRO";
                   break;
               case 11:
-                  conversao = "  DEZEMBRO:";
+                  conversao = "DEZEMBRO";
                   break;
         }
         return conversao;

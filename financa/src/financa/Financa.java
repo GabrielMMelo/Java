@@ -5,6 +5,7 @@
  */
 package financa;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,8 @@ public class Financa {
     /**
      * @param args Os argumentos da linha de comando
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        
         Interface Menu = new Interface();
         //Menu.exibir(1);
         //Menu.menu(); 
@@ -38,7 +40,9 @@ public class Financa {
         }
         else
             //System.out.print("R$"+total);  
-            str = "-R$"+total;
+            str = "R$"+total;
         return str;
     }
+    
+    
 }

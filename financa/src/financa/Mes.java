@@ -25,7 +25,7 @@ public class Mes extends Dia {
     public Mes(int mes) {
         switch(mes){
             case 2: 
-                for (int i = 0; i < 28; i++) {
+                for (int i = 0; i < 29; i++) {
                     Dia dia = new Dia();
                     dias.add(dia);
                 }
