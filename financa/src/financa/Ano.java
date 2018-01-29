@@ -14,7 +14,11 @@ import java.util.ArrayList;
  */
 public class Ano extends Mes {
     ArrayList<Mes> meses = new ArrayList();
-    public static String newline = System.getProperty("line.separator");
+    /**
+     * Constante padrão para quebra de linha
+     */
+   // public static String newline = System.getProperty("line.separator");
+    
     public String ano;
     
     /**
@@ -123,6 +127,7 @@ public class Ano extends Mes {
      
     /**
      * Imprime todas transações do ano
+     * @return Conteúdo total das transações de um ano
      */
     public String listAno() {
         String str;
@@ -142,7 +147,7 @@ public class Ano extends Mes {
     
     /**
      * Converte um número a uma String com o nome do mês correspondente pela fórmula: mes = Número do mês - 1
-     * @param mes Número referente ao mês - 1 (Ex: mes = 1 -> retorna "Fevereiro")
+     * @param mes Número referente ao mês - 1 (Ex: mes = 1 retorna "Fevereiro")
      * @return Nome do mês
      */
     protected String converteMes(int mes) {

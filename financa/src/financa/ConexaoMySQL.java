@@ -5,13 +5,9 @@
  */
 package financa;
 import java.sql.Connection;
- 
 import java.sql.DriverManager;
- 
 import java.sql.SQLException;
-
 import java.sql.Statement;
-
 import java.sql.ResultSet;
 
  
@@ -20,190 +16,153 @@ import java.sql.ResultSet;
  * @author melo
  */
  
+
 public class ConexaoMySQL {
  
-            public static String status = "Não conectou...";
-            public static String newline = System.getProperty("line.separator");
+    /**
+     * Constante para mau retorno de status de conexão
+     */
+    public static String status = "Não conectou...";
+
+    /**
+     * Constante padrão para quebra de linha
+     */
+    public static String newline = System.getProperty("line.separator");
  
 //Método Construtor da Classe//
+
+    /**
+     * Construtor vazio
+     */
  
-        public ConexaoMySQL() {
- 
+    public ConexaoMySQL() {
     }
- 
-  
- 
-//Método de Conexão//
- 
-public static java.sql.Connection getConexaoMySQL() {
- 
+
+    /**
+     * Função que carrega o driver JBDC do mysql e inicia uma conexão
+     * @return Um objeto Connection
+     */
+    public static java.sql.Connection getConexaoMySQL() {
         Connection connection = null;          //atributo do tipo Connection
- 
-  
- 
-try {
- 
-// Carregando o JDBC Driver padrão
- 
-String driverName = "com.mysql.jdbc.Driver";                        
- 
-Class.forName(driverName);
- 
-  
- 
-// Configurando a nossa conexão com um banco de dados//
- 
-            String serverName = "localhost";    //caminho do servidor do BD
- 
-            String mydatabase ="financa";        //nome do seu banco de dados
- 
-            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
- 
-            String username = "root";        //nome de um usuário de seu BD      
- 
-            String password = "vasco2202";      //sua senha de acesso
- 
-            connection = DriverManager.getConnection(url, username, password);
- 
-  
- 
-            //Testa sua conexão//  
- 
-            if (connection != null) {
- 
-                status = ("STATUS--->Conectado com sucesso!");
- 
-            } else {
- 
-                status = ("STATUS--->Não foi possivel realizar conexão");
- 
-            }
- 
-  
- 
-            return connection;
- 
-  
- 
-        } catch (ClassNotFoundException e) {  //Driver não encontrado
- 
-  
- 
-            System.out.println("O driver expecificado nao foi encontrado.");
- 
-            return null;
- 
-        } catch (SQLException e) {
- 
-//Não conseguindo se conectar ao banco
- 
-            System.out.println("Nao foi possivel conectar ao Banco de Dados.");
- 
-            return null;
- 
-        }
- 
-  
- 
-    }
- 
-  
- 
-    //Método que retorna o status da sua conexão//
- 
-    public static String statusConection() {
- 
-        return status;
- 
-    }
- 
-   
- 
-   //Método que fecha sua conexão//
- 
-    public static boolean FecharConexao() {
- 
         try {
- 
-            ConexaoMySQL.getConexaoMySQL().close();
- 
-            return true;
- 
-        } catch (SQLException e) {
- 
-            return false;
- 
+            String driverName = "com.mysql.jdbc.Driver";                        
+            Class.forName(driverName);
+            String serverName = "localhost";    //caminho do servidor do BD
+            String mydatabase ="financa";        //nome do seu banco de dados
+            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+            String username = "root";        //nome de um usuário de seu BD      
+            String password = "vasco2202";      //sua senha de acesso
+            connection = DriverManager.getConnection(url, username, password);
+            if (connection != null) 
+                status = ("STATUS--->Conectado com sucesso!");
+            else 
+                status = ("STATUS--->Não foi possivel realizar conexão");
+            return connection;
+        } catch (ClassNotFoundException e) {  //Driver não encontrado
+            System.out.println("O driver expecificado nao foi encontrado.");
+            return null;
+        } catch (SQLException e) { //Não conseguindo se conectar ao banco
+            System.out.println("Nao foi possivel conectar ao Banco de Dados.");
+            return null;
         }
- 
-  
- 
-    }
- 
-   
- 
-   //Método que reinicia sua conexão//
- 
-    public static java.sql.Connection ReiniciarConexao() {
- 
-        FecharConexao();
- 
-  
- 
-        return ConexaoMySQL.getConexaoMySQL();
- 
     }
     
+    /**
+     * Método que retorna o status da conexão atual
+     * @return Uma mensagem referente ao status atual
+     */
+    public static String statusConection() {
+        return status;
+    }
+
+    /**
+     *  Método que encerra uma conexão
+     * @return True, caso obtenha-se êxito ao fechar a conexão. False, caso contrário.
+     */
+    public static boolean FecharConexao() {
+        try {
+            ConexaoMySQL.getConexaoMySQL().close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        } 
+    }
+
+    /**
+     * Método que encerra e cria outra conexão
+     * @return Um objeto Connection
+     */ 
+    public static java.sql.Connection ReiniciarConexao() {
+        FecharConexao();
+        return ConexaoMySQL.getConexaoMySQL();
+    }
+    
+    /**
+     * Atualiza um dado em uma tabela do Banco de Dados atual
+     * @param table Tabela a ser atualizada
+     * @param dia Chave primária. Dia a ser atualizado
+     * @param entrada Valor da atualização na coluna de entrada
+     * @param saida Valor da atualização na coluna de saida
+     * @param tag Valor da atualização na coluna de TAG
+     * @throws SQLException Exceções SQL
+     */
     public void insert(String table, int dia, float entrada, float saida, String tag) throws SQLException{
         Connection conexao = this.getConexaoMySQL(); 
         Statement comando = conexao.createStatement();
         //comando.executeUpdate("INSERT INTO " + table + " (dia, saida, entrada, tagId) VALUES (" + dia + ", "+ saida + ", " + entrada + ", " + tag + ");");    
-        comando.executeUpdate("UPDATE " + table + " SET  saida = saida + " +saida + ", entrada = entrada + " + entrada + ", tag = CONCAT(tag,'- ', '" + tag + "') WHERE dia = "+ dia + ";");     
-        
+        comando.executeUpdate("UPDATE " + table + " SET  saida = saida + " +saida + ", entrada = entrada + " + entrada + ", tag = CONCAT(tag,'- ', '" + tag + "') WHERE dia = "+ dia + ";");
         comando.close();
         conexao.close();
     }
     
-   /* public void insert(String table, String idTag, String descricao) throws SQLException{
+    
+    /**
+     * Atualiza um dado em uma tabela do Banco de Dados atual
+     * @deprecated Não mais existe a tabela TAG 
+     * @param table Tabela a ser atualizada
+     * @param idTag Valor da identificação da tag
+     * @param descricao Descrição detalhada da TAG
+     * @throws SQLException Exceções SQL
+     */
+    public void insert(String table, String idTag, String descricao) throws SQLException{
         Connection conexao = this.getConexaoMySQL(); 
         Statement comando = conexao.createStatement();
         comando.executeUpdate("INSERT INTO " + table + " (tagId, descricao) VALUES (" + idTag + ", " + descricao + ");");
         comando.close();
         conexao.close();
     }
-    */
     
+
+    /**
+     * Função que retorna uma String com os valores obtidos de um comando SELECT * FROM table
+     * @param table Tabela desejada
+     * @return String com o retorno do SELECT
+     * @throws SQLException
+     */ 
     public String select(String table) throws SQLException {
         Connection conexao = this.getConexaoMySQL(); 
         Statement comando = conexao.createStatement();
         ResultSet linhas = comando.executeQuery ("SELECT * FROM " + table + ";" );
         String str = "";
-      /*  if ("TAG".equals(table)){
-            while (linhas.next()) {
-                String tag = linhas.getString("tagId");
-                String descricao = linhas.getString("descricao"); 
-                str += tag + ", " + descricao + newline;
-              }   
-        }
-        
-        else{
-      */
         while (linhas.next()) {
             String dia = linhas.getString("DIA");
             float saida = (float) linhas.getDouble("SAIDA");
             float entrada = (float) linhas.getDouble("ENTRADA");
             String tag = linhas.getString("tag");
             str += dia + ", " + saida + ", " + entrada + ", " + tag + newline;
-
         }
-      //  }
-        
         comando.close();
         conexao.close();
         System.out.println(str);
         return str;
     }
             
-    
+    /**
+     * Método que lê todos os dados existente em uma tabela e os inserem na estrutura do programa atual
+     * @param ano Objeto da classe Ano referente ao ano em questão
+     * @param table Tabela desejada
+     * @throws SQLException
+     */
     public void select(Ano ano, String table) throws SQLException {
         Connection conexao = this.getConexaoMySQL(); 
         Statement comando = conexao.createStatement();
@@ -263,15 +222,9 @@ Class.forName(driverName);
                 ano.novaTransacao(12, Integer.parseInt(dia), true, saida, tag);
                 ano.novaTransacao(12, Integer.parseInt(dia),  false, entrada, tag);
             }
-
             str += dia + ", " + saida + ", " + entrada + ", " + tag + newline;
-
-        //Animal animal = new Animal(nome, especie, idade, peso);
-        }
-        
-        
+        }              
         comando.close();
         conexao.close();
     }
- 
 }

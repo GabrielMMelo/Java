@@ -88,6 +88,7 @@ public class Mes extends Dia {
     
     /**
      * Método que informa todas as transações de um mês
+     * @return Todo o conteúdo referente as transações de um mês
      */
      public String listMes() {
          String str = "";

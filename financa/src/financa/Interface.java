@@ -38,7 +38,8 @@ public class Interface implements ActionListener {
     
     /**
      * 
-     * @param ano Ano em que as operações referem
+     * Construtor da classe. Cria todos campos de texto, janelas e lê os dados persistentes no Banco de Dados
+     * @throws SQLException Exceções SQL
      */
     public Interface() throws SQLException{
         ta.add(criaTextField("Data: (dd/mm)"));
@@ -79,14 +80,26 @@ public class Interface implements ActionListener {
         this.exibir(1);
     }
     
+    /**
+     * Metódo que torna visível uma janela identificada por seu ID
+     * @param id Número de identificação da janela
+     */
     public void exibir(int id) {
         janelas.get(id-1).setVisible(true);
     }
     
+    /**
+     * Metódo que torna invisível uma janela identificada por seu ID
+     * @param id Número de identificação da janela
+     */
     public void esconder(int id) {
         janelas.get(id-1).setVisible(false);
     }
     
+    /**
+     * Método que cria um novo campo de texto
+     * @param name Conteúdo a ser exibido inicialmente no campo de texto
+     */
     private JTextArea criaTextField(String name){
         JTextArea t = new JTextArea(name); 
         return t;
@@ -99,6 +112,10 @@ public class Interface implements ActionListener {
     }
     */
     
+    /**
+     * Metódo que cria uma nova janela, construindo-a de acordo com seu id
+     * @param id Número de identificação da janela
+     */
     private JFrame criaJanela(int id ) {
         botao = new ArrayList();
         JFrame janela;
@@ -239,7 +256,10 @@ public class Interface implements ActionListener {
         }
         
     }
-    
+    /**
+     * Metódo que cria um novo botão que terá uma Action Listener e um comando associado
+     * @param label String que identifica o botão e seu comando gerado
+     */
     private JButton criaBotao(String label){
         JButton b = new JButton(label);
         b.addActionListener(this);
@@ -749,4 +769,4 @@ public class Interface implements ActionListener {
         System.out.println("");
         
     }*/
-}
+    }

@@ -16,6 +16,7 @@ public class Financa {
     
     /**
      * @param args Os argumentos da linha de comando
+     * @throws SQLException Exceções SQL
      */
     public static void main(String[] args) throws SQLException {
         
@@ -27,6 +28,7 @@ public class Financa {
     /**
      *  Método POLIMÓRFICO que informa o saldo (Entrada - Saida), em R$, de um dia, mês ou ano informado.
      * @param dia Dia, mês ou ano a ser consultado
+     * @return Valor referente ao saldo total do ano
      */
     public static String getSaldo(Dia dia){
         float entrada = dia.getEntrada();

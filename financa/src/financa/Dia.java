@@ -22,6 +22,9 @@ public class Dia  {
      */
     protected float saida;
     ArrayList<Transacao> transacoes = new ArrayList();
+    /**
+     * Constante padrão para quebra de linha
+     */
     public static String newline = System.getProperty("line.separator");
     
     /**
@@ -80,6 +83,7 @@ public class Dia  {
     /**
      * Método que imprime as transações deste dia. Serão mostrados o dia, tipo, valor e tag da transação
      * @param dia Inteiro que servirá como uma identificação do dia, pois nem todos os dias terão necessáriamente uma transação.
+     * @return Todo o conteúdo referente às transações de um dia
      */
     public String listDia(int dia) {
         String str = "";
